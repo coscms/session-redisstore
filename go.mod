@@ -1,6 +1,6 @@
 module github.com/coscms/session-redisstore
 
-go 1.23.1
+go 1.23
 
 require (
 	github.com/admpub/redistore v1.2.1
