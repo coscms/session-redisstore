@@ -1,7 +1,6 @@
 package redisstore
 
 import (
-	"fmt"
 	"log"
 	"strings"
 	"time"
@@ -62,6 +61,7 @@ type RedisOptions struct {
 	DB           uint     `json:"db"`
 	KeyPairs     [][]byte `json:"keyPairs"`
 	MaxAge       int      `json:"maxAge"`
+	EmptyDataAge int      `json:"emptyDataAge"`
 	MaxLength    int      `json:"maxLength"`
 	MaxReconnect int      `json:"maxReconnect"`
 }
@@ -80,7 +80,7 @@ type RedisOptions struct {
 // It is recommended to use an authentication key with 32 or 64 bytes. The encryption key,
 // if set, must be either 16, 24, or 32 bytes to select AES-128, AES-192, or AES-256 modes.
 func NewRedisStore(opts *RedisOptions) (sessions.Store, error) {
-	store, err := redistore.NewRediStoreWithDB(opts.Size, opts.Network, opts.Address, opts.Password, fmt.Sprintf("%d", opts.DB), opts.KeyPairs...)
+	store, err := redistore.NewRediStoreWithDB(opts.Size, opts.Network, opts.Address, opts.Password, int(opts.DB), opts.KeyPairs...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,6 +88,11 @@ func NewRedisStore(opts *RedisOptions) (sessions.Store, error) {
 		store.DefaultMaxAge = opts.MaxAge
 	} else {
 		store.DefaultMaxAge = ss.DefaultMaxAge
+	}
+	if opts.EmptyDataAge > 0 {
+		store.EmptyDataAge = opts.EmptyDataAge
+	} else {
+		store.EmptyDataAge = ss.EmptyDataAge
 	}
 	s := &redisStore{store}
 	if opts.MaxLength > 0 {

@@ -3,12 +3,12 @@ module github.com/coscms/session-redisstore
 go 1.23
 
 require (
-	github.com/admpub/redistore v1.2.1
+	github.com/admpub/redistore v1.2.2
 	github.com/admpub/securecookie v1.3.0
-	github.com/admpub/sessions v0.2.1
+	github.com/admpub/sessions v0.2.2
 	github.com/alicebob/miniredis v2.5.0+incompatible
 	github.com/stretchr/testify v1.9.0
-	github.com/webx-top/echo v1.12.12
+	github.com/webx-top/echo v1.13.2
 )
 
 require (
@@ -25,7 +25,6 @@ require (
 	github.com/alicebob/gopher-json v0.0.0-20200520072559-a9ecdc9d1d3a // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/francoispqt/gojay v1.2.13 // indirect
-	github.com/garyburd/redigo v1.6.4 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/gomodule/redigo v1.8.3 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
